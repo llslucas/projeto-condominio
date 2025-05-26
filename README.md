@@ -4,13 +4,9 @@ Desenvolvido como trabalho para a matéria de Programação Orientada a Objetos 
 # Requisitos do Projeto
 
 ## Requisitos funcionais
-- [ ] Deve ser possível cadastrar residências.
-- [ ] Deve ser possível editar residências.
-- [ ] Deve ser possível excluir residências.
-- [ ] Deve ser possível visualizar residências.
-- [ ] Deve ser possível cadastrar moradores.
-- [ ] Deve ser possível editar moradores.
-- [ ] Deve ser possível visualizar moradores.
+- [ ] Deve ser possível o CRUD das informações do condomínio.
+- [ ] Deve ser possível o CRUD de residências.
+- [ ] Deve ser possível CRUD moradores.
 - [ ] Deve ser possível registrar cobranças mensais.
 - [ ] Deve ser possível visualizar se uma residência está em dia ou não.
 
