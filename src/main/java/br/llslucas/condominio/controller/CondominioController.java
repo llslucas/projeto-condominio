@@ -2,7 +2,7 @@ package br.llslucas.condominio.controller;
 
 import java.util.ArrayList;
 
-import br.llslucas.condominio.Condominio;
+import br.llslucas.condominio.model.Condominio;
 
 public class CondominioController implements Controller<Condominio> {
 
