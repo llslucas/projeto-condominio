@@ -1,5 +1,6 @@
 package br.llslucas.condominio.persistence.dao.mysqldao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,16 +10,19 @@ import java.util.Map;
 import br.llslucas.condominio.model.Fatura;
 import br.llslucas.condominio.persistence.dao.FaturaDAO;
 import br.llslucas.condominio.persistence.exceptions.NotFoundException;
-import br.llslucas.condominio.persistence.instance.MySQLInstance;
 
 public class MySqlFaturaDAO implements FaturaDAO {
+  private Connection connection;
+
+  public MySqlFaturaDAO(Connection connection){
+    this.connection = connection;
+  }
 
   @Override
   public Fatura getById(long id) throws SQLException, NotFoundException {
-    MySQLInstance instance = MySQLInstance.getInstance();
     String sql = "SELECT id, valor, data_vencimento, data_pagamento, status, residencia_id, morador_id FROM fatura WHERE id = ?";
 
-    PreparedStatement statement = instance.getConnection().prepareStatement(sql);
+    PreparedStatement statement = connection.prepareStatement(sql);
     statement.setLong(1, id);
 
     ResultSet result = statement.executeQuery();
@@ -41,10 +45,9 @@ public class MySqlFaturaDAO implements FaturaDAO {
 
   @Override
   public Map<Long, Fatura> list() throws SQLException {
-    MySQLInstance instance = MySQLInstance.getInstance();
     String sql = "SELECT id, valor, data_vencimento, data_pagamento, status, residencia_id, morador_id FROM fatura";
 
-    PreparedStatement statement = instance.getConnection().prepareStatement(sql);
+    PreparedStatement statement = connection.prepareStatement(sql);
 
     ResultSet result = statement.executeQuery();
     Map<Long, Fatura> faturas = new HashMap<>();
@@ -67,10 +70,9 @@ public class MySqlFaturaDAO implements FaturaDAO {
 
   @Override
   public Map<Long, Fatura> listByResidencia(long condominioId) throws SQLException {
-    MySQLInstance instance = MySQLInstance.getInstance();
     String sql = "SELECT id, valor, data_vencimento, data_pagamento, status, residencia_id, morador_id FROM fatura WHERE residencia_id = ?";
 
-    PreparedStatement statement = instance.getConnection().prepareStatement(sql);
+    PreparedStatement statement = connection.prepareStatement(sql);
     statement.setLong(1, condominioId);
 
     ResultSet result = statement.executeQuery();
@@ -94,10 +96,9 @@ public class MySqlFaturaDAO implements FaturaDAO {
 
   @Override
   public Map<Long, Fatura> listByMorador(long condominioId) throws SQLException {
-    MySQLInstance instance = MySQLInstance.getInstance();
     String sql = "SELECT id, valor, data_vencimento, data_pagamento, status, residencia_id, morador_id FROM fatura WHERE residencia_id = ?";
 
-    PreparedStatement statement = instance.getConnection().prepareStatement(sql);
+    PreparedStatement statement = connection.prepareStatement(sql);
     statement.setLong(1, condominioId);
 
     ResultSet result = statement.executeQuery();
@@ -121,10 +122,9 @@ public class MySqlFaturaDAO implements FaturaDAO {
 
   @Override
   public void create(Fatura fatura) throws SQLException {
-    MySQLInstance instance = MySQLInstance.getInstance();
     String sql = "INSERT INTO fatura(valor, data_vencimento, data_pagamento, status, residencia_id, morador_id) VALUES (?, ? ,? ,?, ?, ?)";
 
-    PreparedStatement statement = instance.getConnection().prepareStatement(sql);
+    PreparedStatement statement = connection.prepareStatement(sql);
     statement.setDouble(1, fatura.getValor());
     statement.setDate(2, fatura.getDataVencimento());
     statement.setDate(3, fatura.getDataPagamento());
@@ -137,10 +137,9 @@ public class MySqlFaturaDAO implements FaturaDAO {
 
   @Override
   public void save(Fatura fatura) throws SQLException {
-    MySQLInstance instance = MySQLInstance.getInstance();
     String sql = "UPDATE fatura SET nome = ?, idade = ?, rg = ?, cpf = ?, residencia_id = ? WHERE id = ?";
 
-    PreparedStatement statement = instance.getConnection().prepareStatement(sql);
+    PreparedStatement statement = connection.prepareStatement(sql);
     statement.setDouble(1, fatura.getValor());
     statement.setDate(2, fatura.getDataVencimento());
     statement.setDate(3, fatura.getDataPagamento());
@@ -154,10 +153,9 @@ public class MySqlFaturaDAO implements FaturaDAO {
 
   @Override
   public void delete(Fatura fatura) throws SQLException {
-    MySQLInstance instance = MySQLInstance.getInstance();
     String sql = "DELETE FROM fatura WHERE id = ?";
 
-    PreparedStatement statement = instance.getConnection().prepareStatement(sql);
+    PreparedStatement statement = connection.prepareStatement(sql);
     statement.setLong(1, fatura.getId());
 
     statement.executeUpdate();

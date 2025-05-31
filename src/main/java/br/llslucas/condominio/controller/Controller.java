@@ -1,17 +1,15 @@
 package br.llslucas.condominio.controller;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 public interface Controller<T> {
+	public abstract T getById(Long id) throws Exception;
 
-	public abstract boolean create();
+	public abstract Map<Long, T> list() throws Exception;
 
-	public abstract boolean update();
+	public abstract void create(T object) throws Exception;
 
-	public abstract T get();
+	public abstract void update(T object) throws Exception;
 
-	public abstract ArrayList<T> list();
-
-	public abstract boolean delete(T item);
-
+	public abstract void delete(T object) throws Exception;
 }

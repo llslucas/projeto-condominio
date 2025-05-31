@@ -1,34 +1,73 @@
 package br.llslucas.condominio.controller;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 import br.llslucas.condominio.model.Residencia;
+import br.llslucas.condominio.persistence.DAOClient;
 
 public class ResidenciaController implements Controller<Residencia> {
+	private DAOClient dao;
 
-	@Override
-	public boolean create() {
-		return false;
+	public ResidenciaController(DAOClient dao) {
+		this.dao = dao;
 	}
 
 	@Override
-	public boolean update() {
-		return false;
+	public Residencia getById(Long id) throws Exception {
+		try {
+			return dao.createResidenciaDAO().getById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	@Override
-	public Residencia get() {
-		return null;
+	public Map<Long, Residencia> list() throws Exception {
+		try {
+			return dao.createResidenciaDAO().list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	public Map<Long, Residencia> listByCondominio(long condominioId) throws Exception {
+		try {
+			return dao.createResidenciaDAO().listByCondominio(condominioId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	@Override
-	public ArrayList<Residencia> list() {
-		return null;
+	public void create(Residencia residencia) throws Exception {
+		try {
+			dao.createResidenciaDAO().create(residencia);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	@Override
-	public boolean delete(Residencia item) {
-		return false;
+	public void update(Residencia residencia) throws Exception {
+		try {
+			dao.createResidenciaDAO().save(residencia);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
+	@Override
+	public void delete(Residencia residencia) throws Exception {
+		try {
+			dao.createResidenciaDAO().delete(residencia);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
 }

@@ -1,5 +1,9 @@
 package br.llslucas.condominio.persistence;
 
+import br.llslucas.condominio.persistence.dao.CondominioDAO;
+import br.llslucas.condominio.persistence.dao.FaturaDAO;
+import br.llslucas.condominio.persistence.dao.MoradorDAO;
+import br.llslucas.condominio.persistence.dao.ResidenciaDAO;
 import br.llslucas.condominio.persistence.factory.DAOFactory;
 
 public class DAOClient {
@@ -10,12 +14,19 @@ public class DAOClient {
     this.daoFactory = daoFactory;
   }
 
-  public DAOFactory getDAOFactory() {
-    return daoFactory;
+  public CondominioDAO createCondominioDAO() throws Exception{
+    return daoFactory.createCondominioDAO();
   }
 
-  public void setDAOFactory(DAOFactory daoFactory) {
-    this.daoFactory = daoFactory;
+  public MoradorDAO createMoradorDAO() throws Exception{
+    return daoFactory.createMoradorDAO();
   }
 
+  public ResidenciaDAO createResidenciaDAO() throws Exception{
+    return daoFactory.createResidenciaDAO();
+  }
+
+  public  FaturaDAO createFaturaDAO() throws Exception{
+    return daoFactory.createFaturaDAO();
+  }
 }
