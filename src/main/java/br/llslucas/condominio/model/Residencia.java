@@ -1,27 +1,27 @@
 package br.llslucas.condominio.model;
 
-import java.util.ArrayList;
-
 public class Residencia {
 
   private long id;
   private String rua;
   private long numero;
   private String cep;
-  private Morador proprietario;
-  private ArrayList<Morador> moradores;
+  private String tipo;
+  private long proprietarioId;
+  private long condominioId;
 
   public Residencia() {
 
   }
 
-  public Residencia(long id, String rua, long numero, String cep, Morador proprietario, ArrayList<Morador> moradores) {
+  public Residencia(long id, String rua, long numero, String cep, String tipo, long proprietarioId, long condominioId) {
     this.id = id;
     this.rua = rua;
     this.numero = numero;
     this.cep = cep;
-    this.proprietario = proprietario;
-    this.moradores = moradores;
+    this.tipo = tipo;
+    this.proprietarioId = proprietarioId;
+    this.condominioId = condominioId;
   }
 
   public long getId() {
@@ -56,20 +56,28 @@ public class Residencia {
     this.cep = cep;
   }
 
-  public Morador getProprietario() {
-    return proprietario;
+  public String getTipo() {
+    return tipo;
   }
 
-  public void setProprietario(Morador proprietario) {
-    this.proprietario = proprietario;
+  public void setTipo(String tipo) {
+    this.tipo = tipo;
   }
 
-  public ArrayList<Morador> getMoradores() {
-    return moradores;
+  public long getProprietarioId() {
+    return proprietarioId;
   }
 
-  public void setMoradores(ArrayList<Morador> moradores) {
-    this.moradores = moradores;
+  public void setProprietarioId(long proprietarioId) {
+    this.proprietarioId = proprietarioId;
+  }
+
+  public long getCondominioId() {
+    return condominioId;
+  }
+
+  public void setCondominioId(long condominioId) {
+    this.condominioId = condominioId;
   }
 
   @Override

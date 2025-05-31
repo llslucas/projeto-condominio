@@ -1,7 +1,5 @@
 package br.llslucas.condominio.model;
 
-import java.util.ArrayList;
-
 public class Morador {
 
   private long id;
@@ -9,21 +7,19 @@ public class Morador {
   private int idade;
   private String rg;
   private String cpf;
-  private ArrayList<Fatura> faturas;
-  private Residencia residencia;
+  private long residenciaId;
 
   public Morador() {
 
   }
 
-  public Morador(long id, String nome, int idade, String rg, String cpf, ArrayList<Fatura> faturas, Residencia residencia) {
+  public Morador(long id, String nome, int idade, String rg, String cpf, long residenciaId) {
     this.id = id;
     this.nome = nome;
     this.idade = idade;
     this.rg = rg;
     this.cpf = cpf;
-    this.faturas = faturas;
-    this.residencia = residencia;
+    this.residenciaId = residenciaId;
   }
 
   public long getId() {
@@ -66,20 +62,12 @@ public class Morador {
     this.cpf = cpf;
   }
 
-  public ArrayList<Fatura> getFaturas() {
-    return faturas;
+  public long getResidenciaId() {
+    return residenciaId;
   }
 
-  public void setFaturas(ArrayList<Fatura> faturas) {
-    this.faturas = faturas;
-  }
-
-  public Residencia getResidencia() {
-    return residencia;
-  }
-
-  public void setResidencia(Residencia residencia) {
-    this.residencia = residencia;
+  public void setResidencia(long residenciaId) {
+    this.residenciaId = residenciaId;
   }
 
   @Override
