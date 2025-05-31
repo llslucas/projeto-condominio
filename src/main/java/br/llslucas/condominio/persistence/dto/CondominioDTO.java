@@ -1,22 +1,18 @@
 package br.llslucas.condominio.persistence.dto;
 
-import java.util.ArrayList;
-
 public class CondominioDTO {
 
   private long id;
   private String cnpj;
   private String razao_social;
-  private ArrayList<Long> residencias;
 
   public CondominioDTO() {
   }
 
-  public CondominioDTO(long id, String cnpj, String razao_social, ArrayList<Long> residencias) {
+  public CondominioDTO(long id, String cnpj, String razao_social) {
     this.id = id;
     this.cnpj = cnpj;
     this.razao_social = razao_social;
-    this.residencias = residencias;
   }
 
   public long getId() {
@@ -41,14 +37,6 @@ public class CondominioDTO {
 
   public void setRazao_social(String razao_social) {
     this.razao_social = razao_social;
-  }
-
-  public ArrayList<Long> getResidencias() {
-    return residencias;
-  }
-
-  public void setResidencias(ArrayList<Long> residencias) {
-    this.residencias = residencias;
   }
 
   @Override

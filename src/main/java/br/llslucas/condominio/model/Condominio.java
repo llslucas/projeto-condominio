@@ -1,23 +1,19 @@
 package br.llslucas.condominio.model;
 
-import java.util.ArrayList;
-
 public class Condominio {
 
   private long id;
   private String cnpj;
   private String razaoSocial;
-  private ArrayList<Residencia> residencias;
 
   public Condominio() {
 
   }
 
-  public Condominio(long id, String cnpj, String razaoSocial, ArrayList<Residencia> residencias) {
+  public Condominio(long id, String cnpj, String razaoSocial) {
     this.id = id;
     this.cnpj = cnpj;
     this.razaoSocial = razaoSocial;
-    this.residencias = residencias;
   }
 
   public long getId() {
@@ -42,14 +38,6 @@ public class Condominio {
 
   public void setRazaoSocial(String razaoSocial) {
     this.razaoSocial = razaoSocial;
-  }
-
-  public ArrayList<Residencia> getResidencias() {
-    return residencias;
-  }
-
-  public void setResidencias(ArrayList<Residencia> residencias) {
-    this.residencias = residencias;
   }
 
   @Override
