@@ -13,7 +13,7 @@ public class MoradorController implements Controller<Morador> {
 	}
 
 	@Override
-	public Morador getById(Long id) throws Exception {
+	public Morador getById(long id) throws Exception {
 		try {
 			return dao.createMoradorDAO().getById(id);
 		} catch (Exception e) {

@@ -16,6 +16,16 @@ public class Fatura {
 
   }
 
+  public Fatura(double valor, Date dataVencimento, Date dataPagamento, String status, long residenciaId,
+      long moradorId) {
+    this.valor = valor;
+    this.dataVencimento = dataVencimento;
+    this.dataPagamento = dataPagamento;
+    this.status = status;
+    this.residenciaId = residenciaId;
+    this.moradorId = moradorId;
+  }
+
   public Fatura(long id, double valor, Date dataVencimento, Date dataPagamento, String status, long residenciaId,
       long moradorId) {
     this.id = id;

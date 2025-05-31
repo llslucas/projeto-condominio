@@ -16,6 +16,11 @@ public class Condominio {
     this.razaoSocial = razaoSocial;
   }
 
+  public Condominio(String cnpj, String razaoSocial) {
+    this.cnpj = cnpj;
+    this.razaoSocial = razaoSocial;
+  }
+
   public long getId() {
     return id;
   }

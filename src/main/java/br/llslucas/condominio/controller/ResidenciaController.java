@@ -13,7 +13,7 @@ public class ResidenciaController implements Controller<Residencia> {
 	}
 
 	@Override
-	public Residencia getById(Long id) throws Exception {
+	public Residencia getById(long id) throws Exception {
 		try {
 			return dao.createResidenciaDAO().getById(id);
 		} catch (Exception e) {

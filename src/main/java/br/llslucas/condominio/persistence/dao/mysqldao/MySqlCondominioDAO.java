@@ -78,7 +78,7 @@ public class MySqlCondominioDAO implements CondominioDAO {
     PreparedStatement statement = connection.prepareStatement(sql);
     statement.setString(1, condominio.getCnpj());
     statement.setString(2, condominio.getRazaoSocial());
-    statement.setLong(7, condominio.getId());
+    statement.setLong(3, condominio.getId());
 
     statement.executeUpdate();
   }

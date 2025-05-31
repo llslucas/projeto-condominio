@@ -13,6 +13,14 @@ public class Morador {
 
   }
 
+  public Morador(String nome, int idade, String rg, String cpf, long residenciaId) {
+    this.nome = nome;
+    this.idade = idade;
+    this.rg = rg;
+    this.cpf = cpf;
+    this.residenciaId = residenciaId;
+  }
+
   public Morador(long id, String nome, int idade, String rg, String cpf, long residenciaId) {
     this.id = id;
     this.nome = nome;

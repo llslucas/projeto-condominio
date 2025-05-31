@@ -3,7 +3,7 @@ package br.llslucas.condominio.controller;
 import java.util.Map;
 
 public interface Controller<T> {
-	public abstract T getById(Long id) throws Exception;
+	public abstract T getById(long id) throws Exception;
 
 	public abstract Map<Long, T> list() throws Exception;
 

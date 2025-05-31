@@ -13,7 +13,7 @@ public class FaturaController implements Controller<Fatura> {
 	}
 
 	@Override
-	public Fatura getById(Long id) throws Exception {
+	public Fatura getById(long id) throws Exception {
 		try {
 			return dao.createFaturaDAO().getById(id);
 		} catch (Exception e) {

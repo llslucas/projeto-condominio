@@ -13,7 +13,7 @@ public class CondominioController implements Controller<Condominio> {
 	}
 
 	@Override
-	public Condominio getById(Long id) throws Exception {
+	public Condominio getById(long id) throws Exception {
 		try {
 			return dao.createCondominioDAO().getById(id);
 		} catch (Exception e) {
@@ -23,7 +23,7 @@ public class CondominioController implements Controller<Condominio> {
 	}
 
 	@Override
-	public Map<Long, Condominio> list() throws Exception  {
+	public Map<Long, Condominio> list() throws Exception {
 		try {
 			return dao.createCondominioDAO().list();
 		} catch (Exception e) {

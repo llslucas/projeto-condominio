@@ -14,6 +14,15 @@ public class Residencia {
 
   }
 
+  public Residencia(String rua, long numero, String cep, String tipo, long proprietarioId, long condominioId) {
+    this.rua = rua;
+    this.numero = numero;
+    this.cep = cep;
+    this.tipo = tipo;
+    this.proprietarioId = proprietarioId;
+    this.condominioId = condominioId;
+  }
+
   public Residencia(long id, String rua, long numero, String cep, String tipo, long proprietarioId, long condominioId) {
     this.id = id;
     this.rua = rua;
