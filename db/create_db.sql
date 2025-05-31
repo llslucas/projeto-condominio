@@ -1,11 +1,11 @@
-CREATE DATABASE IF NOT EXISTS condominio;
+CREATE DATABASE IF NOT EXISTS main_condominio;
 
-USE condominio;
+USE main_condominio;
 
 CREATE TABLE IF NOT EXISTS condominio (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cnpj VARCHAR(255) NOT NULL,
-    razao_social VARCHAR(255) NOT NULL,
+    razao_social VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS residencia (
@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS residencia (
     tipo VARCHAR(50) NOT NULL,
     proprietario_id INT NOT NULL,
     condominio_id INT NOT NULL,
-    FOREIGN KEY (proprietario_id) REFERENCES morador(id)
     FOREIGN KEY (condominio_id) REFERENCES condominio(id)
 );
 
@@ -41,3 +40,6 @@ CREATE TABLE IF NOT EXISTS fatura (
     FOREIGN KEY (morador_id) REFERENCES morador(id),
     FOREIGN KEY (residencia_id) REFERENCES residencia(id)
 );
+
+ALTER TABLE residencia ADD CONSTRAINT fk_proprietario
+    FOREIGN KEY (proprietario_id) REFERENCES morador(id);
