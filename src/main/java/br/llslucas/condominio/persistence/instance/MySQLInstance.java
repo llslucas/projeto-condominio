@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySQLInstance {
+
   private static MySQLInstance instance;
   private Connection connection;
 

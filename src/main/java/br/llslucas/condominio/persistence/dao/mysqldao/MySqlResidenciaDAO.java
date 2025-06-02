@@ -4,22 +4,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 
 import br.llslucas.condominio.model.Residencia;
 import br.llslucas.condominio.persistence.dao.ResidenciaDAO;
 import br.llslucas.condominio.persistence.exceptions.NotFoundException;
+import java.util.TreeMap;
 
 public class MySqlResidenciaDAO implements ResidenciaDAO {
+
   private Connection connection;
 
-  public MySqlResidenciaDAO(Connection connection){
+  public MySqlResidenciaDAO(Connection connection) {
     this.connection = connection;
   }
 
   @Override
-  public Residencia getById(long id) throws SQLException, NotFoundException {
+  public Residencia getById(Long id) throws SQLException, NotFoundException {
     String sql = "SELECT id, rua, numero, cep, tipo, proprietario_id, condominio_id FROM residencia WHERE id = ?";
 
     PreparedStatement statement = connection.prepareStatement(sql);
@@ -29,13 +30,13 @@ public class MySqlResidenciaDAO implements ResidenciaDAO {
 
     if (result.next()) {
       Residencia residencia = new Residencia(
-          result.getLong("id"),
-          result.getString("rua"),
-          result.getLong("numero"),
-          result.getString("cep"),
-          result.getString("tipo"),
-          result.getLong("proprietario_id"),
-          result.getLong("condominio_id"));
+	      result.getLong("id"),
+	      result.getString("rua"),
+	      result.getLong("numero"),
+	      result.getString("cep"),
+	      result.getString("tipo"),
+	      result.getObject("proprietario_id", Long.class),
+	      result.getLong("condominio_id"));
 
       return residencia;
     } else {
@@ -45,50 +46,50 @@ public class MySqlResidenciaDAO implements ResidenciaDAO {
 
   @Override
   public Map<Long, Residencia> list() throws SQLException {
-    String sql = "SELECT rua, numero, cep, tipo, proprietario_id, condominio_id FROM residencia";
+    String sql = "SELECT id, rua, numero, cep, tipo, proprietario_id, condominio_id FROM residencia";
 
     PreparedStatement statement = connection.prepareStatement(sql);
 
     ResultSet result = statement.executeQuery();
-    Map<Long, Residencia> residencias = new HashMap<>();
+    Map<Long, Residencia> residencias = new TreeMap<>();
 
     while (result.next()) {
       residencias.put(
-          result.getLong("id"),
-          new Residencia(
-              result.getLong("id"),
-              result.getString("rua"),
-              result.getLong("numero"),
-              result.getString("cep"),
-              result.getString("tipo"),
-              result.getLong("proprietario_id"),
-              result.getLong("condominio_id")));
+	      result.getLong("id"),
+	      new Residencia(
+		      result.getLong("id"),
+		      result.getString("rua"),
+		      result.getLong("numero"),
+		      result.getString("cep"),
+		      result.getString("tipo"),
+		      result.getObject("proprietario_id", Long.class),
+		      result.getLong("condominio_id")));
     }
 
     return residencias;
   }
 
   @Override
-  public Map<Long, Residencia> listByCondominio(long condominioId) throws SQLException {
-    String sql = "SELECT rua, numero, cep, tipo, proprietario_id, condominio_id FROM residencia WHERE condominio_id = ?";
+  public Map<Long, Residencia> listByCondominio(Long condominioId) throws SQLException {
+    String sql = "SELECT id, rua, numero, cep, tipo, proprietario_id, condominio_id FROM residencia WHERE condominio_id = ?";
 
     PreparedStatement statement = connection.prepareStatement(sql);
     statement.setLong(1, condominioId);
 
     ResultSet result = statement.executeQuery();
-    Map<Long, Residencia> residencias = new HashMap<>();
+    Map<Long, Residencia> residencias = new TreeMap<>();
 
     while (result.next()) {
       residencias.put(
-          result.getLong("id"),
-          new Residencia(
-              result.getLong("id"),
-              result.getString("rua"),
-              result.getLong("numero"),
-              result.getString("cep"),
-              result.getString("tipo"),
-              result.getLong("proprietario_id"),
-              result.getLong("condominio_id")));
+	      result.getLong("id"),
+	      new Residencia(
+		      result.getLong("id"),
+		      result.getString("rua"),
+		      result.getLong("numero"),
+		      result.getString("cep"),
+		      result.getString("tipo"),
+		      result.getObject("proprietario_id", Long.class),
+		      result.getLong("condominio_id")));
     }
 
     return residencias;
@@ -103,7 +104,13 @@ public class MySqlResidenciaDAO implements ResidenciaDAO {
     statement.setLong(2, residencia.getNumero());
     statement.setString(3, residencia.getCep());
     statement.setString(4, residencia.getTipo());
-    statement.setLong(5, residencia.getProprietarioId());
+
+    if (residencia.getProprietarioId() != null) {
+      statement.setLong(5, residencia.getProprietarioId());
+    } else {
+      statement.setNull(5, java.sql.Types.INTEGER);
+    }
+
     statement.setLong(6, residencia.getCondominioId());
 
     statement.executeUpdate();
@@ -118,8 +125,15 @@ public class MySqlResidenciaDAO implements ResidenciaDAO {
     statement.setLong(2, residencia.getNumero());
     statement.setString(3, residencia.getCep());
     statement.setString(4, residencia.getTipo());
-    statement.setLong(5, residencia.getProprietarioId());
+    
+    if (residencia.getProprietarioId() != null) {
+      statement.setLong(5, residencia.getProprietarioId());
+    } else {
+      statement.setNull(5, java.sql.Types.INTEGER);
+    }
+    
     statement.setLong(6, residencia.getCondominioId());
+    
     statement.setLong(7, residencia.getId());
 
     statement.executeUpdate();

@@ -1,40 +1,41 @@
 package br.llslucas.condominio.model;
+import java.sql.Date;
 
-public class Morador {
+public class Morador implements Comparable<Morador>{
 
-  private long id;
+  private Long id;
   private String nome;
-  private int idade;
+  private Date dataNascimento;
   private String rg;
   private String cpf;
-  private long residenciaId;
+  private Long residenciaId;
 
   public Morador() {
 
   }
 
-  public Morador(String nome, int idade, String rg, String cpf, long residenciaId) {
+  public Morador(String nome, Date datanascimento, String rg, String cpf, Long residenciaId) {
     this.nome = nome;
-    this.idade = idade;
+    this.dataNascimento = datanascimento;
     this.rg = rg;
     this.cpf = cpf;
     this.residenciaId = residenciaId;
   }
 
-  public Morador(long id, String nome, int idade, String rg, String cpf, long residenciaId) {
+  public Morador(Long id, String nome, Date datanascimento, String rg, String cpf, Long residenciaId) {
     this.id = id;
     this.nome = nome;
-    this.idade = idade;
+    this.dataNascimento = datanascimento;
     this.rg = rg;
     this.cpf = cpf;
     this.residenciaId = residenciaId;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -46,12 +47,12 @@ public class Morador {
     this.nome = nome;
   }
 
-  public int getIdade() {
-    return idade;
+  public Date getDataNascimento() {
+    return dataNascimento;
   }
 
-  public void setIdade(int idade) {
-    this.idade = idade;
+  public void setDataNascimento(Date datanascimento) {
+    this.dataNascimento = datanascimento;
   }
 
   public String getRg() {
@@ -70,11 +71,11 @@ public class Morador {
     this.cpf = cpf;
   }
 
-  public long getResidenciaId() {
+  public Long getResidenciaId() {
     return residenciaId;
   }
 
-  public void setResidencia(long residenciaId) {
+  public void setResidencia(Long residenciaId) {
     this.residenciaId = residenciaId;
   }
 
@@ -97,6 +98,16 @@ public class Morador {
       return false;
     }
     final Morador other = (Morador) obj;
-    return this.id == other.id;
+    return this.id.equals(other.id);
+  }
+  
+  @Override
+  public String toString() {
+    return this.getId() + " - " + this.getNome();
+  } 
+
+  @Override
+  public int compareTo(Morador o) {
+    return (int) (this.id - o.id);
   }
 }

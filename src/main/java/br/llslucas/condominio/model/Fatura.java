@@ -2,22 +2,30 @@ package br.llslucas.condominio.model;
 
 import java.sql.Date;
 
-public class Fatura {
+public class Fatura implements Comparable<Fatura> {
 
-  private long id;
+  private Long id;
   private double valor;
   private Date dataVencimento;
   private Date dataPagamento;
   private String status;
-  private long residenciaId;
-  private long moradorId;
+  private Long residenciaId;
+  private Long moradorId;
 
   public Fatura() {
 
   }
+  
+  public Fatura(double valor, Date dataVencimento, Long residenciaId, Long moradorId) {
+    this.valor = valor;
+    this.dataVencimento = dataVencimento;
+    this.status = "Aberto";
+    this.residenciaId = residenciaId;
+    this.moradorId = moradorId;
+  }
 
-  public Fatura(double valor, Date dataVencimento, Date dataPagamento, String status, long residenciaId,
-      long moradorId) {
+  public Fatura(double valor, Date dataVencimento, Date dataPagamento, String status, Long residenciaId,
+	  Long moradorId) {
     this.valor = valor;
     this.dataVencimento = dataVencimento;
     this.dataPagamento = dataPagamento;
@@ -26,8 +34,8 @@ public class Fatura {
     this.moradorId = moradorId;
   }
 
-  public Fatura(long id, double valor, Date dataVencimento, Date dataPagamento, String status, long residenciaId,
-      long moradorId) {
+  public Fatura(Long id, double valor, Date dataVencimento, Date dataPagamento, String status, Long residenciaId,
+	  Long moradorId) {
     this.id = id;
     this.valor = valor;
     this.dataVencimento = dataVencimento;
@@ -37,11 +45,11 @@ public class Fatura {
     this.moradorId = moradorId;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -77,19 +85,19 @@ public class Fatura {
     this.status = status;
   }
 
-  public long getResidenciaId() {
+  public Long getResidenciaId() {
     return residenciaId;
   }
 
-  public void setResidenciaId(long residenciaId) {
+  public void setResidenciaId(Long residenciaId) {
     this.residenciaId = residenciaId;
   }
 
-  public long getMoradorId() {
+  public Long getMoradorId() {
     return moradorId;
   }
 
-  public void setMoradorId(long moradorId) {
+  public void setMoradorId(Long moradorId) {
     this.moradorId = moradorId;
   }
 
@@ -115,7 +123,12 @@ public class Fatura {
     }
 
     final Fatura other = (Fatura) obj;
-    return this.id == other.id;
+    return this.id.equals(other.id);
+  }
+
+  @Override
+  public int compareTo(Fatura o) {
+    return (int) (this.id - o.id);
   }
 
 }

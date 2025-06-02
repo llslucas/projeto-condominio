@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 
 import br.llslucas.condominio.model.Condominio;
 import br.llslucas.condominio.persistence.dao.CondominioDAO;
 import br.llslucas.condominio.persistence.exceptions.NotFoundException;
+import java.util.TreeMap;
 
 public class MySqlCondominioDAO implements CondominioDAO {
   private Connection connection;
@@ -19,7 +19,7 @@ public class MySqlCondominioDAO implements CondominioDAO {
   }
 
   @Override
-  public Condominio getById(long id) throws SQLException, NotFoundException {
+  public Condominio getById(Long id) throws SQLException, NotFoundException {
     String sql = "SELECT id, cnpj, razao_social FROM condominio WHERE id = ?";
 
     PreparedStatement statement = connection.prepareStatement(sql);
@@ -46,7 +46,7 @@ public class MySqlCondominioDAO implements CondominioDAO {
     PreparedStatement statement = connection.prepareStatement(sql);
 
     ResultSet result = statement.executeQuery();
-    Map<Long, Condominio> condominios = new HashMap<>();
+    Map<Long, Condominio> condominios = new TreeMap<>();
 
     while (result.next()) {
       condominios.put(

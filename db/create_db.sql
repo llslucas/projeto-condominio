@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS residencia (
     numero VARCHAR(10) NOT NULL,
     cep VARCHAR(10) NOT NULL,
     tipo VARCHAR(50) NOT NULL,
-    proprietario_id INT NOT NULL,
+    proprietario_id INT,
     condominio_id INT NOT NULL,
     FOREIGN KEY (condominio_id) REFERENCES condominio(id)
 );

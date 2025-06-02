@@ -1,20 +1,21 @@
 package br.llslucas.condominio.model;
 
-public class Residencia {
+public class Residencia implements Comparable<Residencia> {
 
-  private long id;
+  private Long id;
   private String rua;
-  private long numero;
+  private Long numero;
   private String cep;
   private String tipo;
-  private long proprietarioId;
-  private long condominioId;
+  private String status;
+  private Long proprietarioId;
+  private Long condominioId;
 
   public Residencia() {
 
   }
 
-  public Residencia(String rua, long numero, String cep, String tipo, long proprietarioId, long condominioId) {
+  public Residencia(String rua, Long numero, String cep, String tipo, Long proprietarioId, Long condominioId) {
     this.rua = rua;
     this.numero = numero;
     this.cep = cep;
@@ -23,7 +24,7 @@ public class Residencia {
     this.condominioId = condominioId;
   }
 
-  public Residencia(long id, String rua, long numero, String cep, String tipo, long proprietarioId, long condominioId) {
+  public Residencia(Long id, String rua, Long numero, String cep, String tipo, Long proprietarioId, Long condominioId) {
     this.id = id;
     this.rua = rua;
     this.numero = numero;
@@ -33,11 +34,11 @@ public class Residencia {
     this.condominioId = condominioId;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -49,11 +50,11 @@ public class Residencia {
     this.rua = rua;
   }
 
-  public long getNumero() {
+  public Long getNumero() {
     return numero;
   }
 
-  public void setNumero(long numero) {
+  public void setNumero(Long numero) {
     this.numero = numero;
   }
 
@@ -73,19 +74,27 @@ public class Residencia {
     this.tipo = tipo;
   }
 
-  public long getProprietarioId() {
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public Long getProprietarioId() {
     return proprietarioId;
   }
 
-  public void setProprietarioId(long proprietarioId) {
+  public void setProprietarioId(Long proprietarioId) {
     this.proprietarioId = proprietarioId;
   }
 
-  public long getCondominioId() {
+  public Long getCondominioId() {
     return condominioId;
   }
 
-  public void setCondominioId(long condominioId) {
+  public void setCondominioId(Long condominioId) {
     this.condominioId = condominioId;
   }
 
@@ -101,16 +110,26 @@ public class Residencia {
     if (this == obj) {
       return true;
     }
-    
+
     if (obj == null) {
       return false;
     }
-    
+
     if (getClass() != obj.getClass()) {
       return false;
     }
-    
+
     final Residencia other = (Residencia) obj;
-    return this.id == other.id;
+    return this.id.equals(other.id);
+  }
+
+  @Override
+  public String toString() {
+    return this.getId() + " - " + this.getRua() + " - " + this.getNumero();
+  }
+
+  @Override
+  public int compareTo(Residencia o) {
+    return (int) (this.id - o.id);
   }
 }

@@ -1,8 +1,8 @@
 package br.llslucas.condominio.model;
 
-public class Condominio {
+public class Condominio implements Comparable<Condominio>{
 
-  private long id;
+  private Long id;
   private String cnpj;
   private String razaoSocial;
 
@@ -10,7 +10,7 @@ public class Condominio {
 
   }
 
-  public Condominio(long id, String cnpj, String razaoSocial) {
+  public Condominio(Long id, String cnpj, String razaoSocial) {
     this.id = id;
     this.cnpj = cnpj;
     this.razaoSocial = razaoSocial;
@@ -21,11 +21,11 @@ public class Condominio {
     this.razaoSocial = razaoSocial;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -67,7 +67,16 @@ public class Condominio {
     }
     
     final Condominio other = (Condominio) obj;
-    return this.id == other.id;
+    return this.id.equals(other.id);
   }
+  
+  @Override
+  public String toString() {
+    return this.getId() + " - " + this.getRazaoSocial();
+  } 
 
+  @Override
+  public int compareTo(Condominio o) {
+    return (int) (this.id - o.id);
+  }
 }
